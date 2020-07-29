@@ -150,24 +150,25 @@ flex-direction: column;
   height: 40px;
   font-weight: bold;
   border:1px dashed green;
-  box-shadow: 2px 2px green;
-
-  
   cursor: pointer;
   width: 150px;
   font-family: pixel-font;
   font-size: 32px;
   color: green;
+  background-color: #071305;
+  box-shadow: 2px 2px black;
+
+  
   
 
 }
 
 .button:hover {
-  font-family: fantasy;
-  color: black;
+  font-family: 'Courier New', Courier, monospace;
+  color: white;
   font-size: 25px;
-  box-shadow: 2px 2px lime;
-  border:2px solid green;
+  border:2px dotted green;
+  box-shadow: 2px 2px green;
 
 }
 
@@ -226,8 +227,8 @@ flex-direction: column;
 
 .options_heading {
 font-size: 45px;
-margin-left: -65px;
 color: lime;
+margin-right: 25px;
 }
 
 .stats_value {
@@ -264,8 +265,12 @@ color: lime;
 .option_input {
   width: 50px;
   height: 30px;
-  font-size: 25px;
+  font-size: 40px;
   text-align: center;
+  font-family: 'pixel-font';
+  border: 2px dotted lime;
+  background-color: #071305;
+  color: aliceblue;
 }
 .help_item {
   cursor: help;

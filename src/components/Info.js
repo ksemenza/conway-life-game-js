@@ -8,6 +8,7 @@ const Info = props => {
     return (
       <section className="info">
         <h1 className="heading info_heading">Conway's Game Of Life</h1>
+        
         <div className="info_section help">
         <div className='ctx-wrap'>
         <div className='setup-btn'>
