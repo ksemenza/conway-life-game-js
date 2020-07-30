@@ -215,7 +215,7 @@ flex-direction: column;
   transition-duration: 200ms;
   border:2px dashed lime;
   align-items: flex-start;
-  margin-bottom: 250px;
+  margin-bottom: 450px;
 }
 
 .message_fading {
@@ -241,6 +241,14 @@ font-size: 45px;
 margin-left: -65px;
 color: lime;
 margin-left: 5px;
+margin-top: -15px;
+margin-bottom: -15px;
+}
+
+.settings-details {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 18px;
+  margin: 35px auto;
 }
 
 .stats_value {
@@ -255,12 +263,10 @@ margin-left: 5px;
   display: flex;
   justify-content: space-evenly;
   width: 100%;
-  padding-top: 15px;
   color: white;
   flex-direction: column;
   
 
-  
 }
 
 input#eraser {
@@ -326,6 +332,11 @@ input#eraser {
 
 .square_type-death {
   background-color:#232122;
+}
+
+.copyright {
+  color: lime;
+  font-size: 35px;
 }
 
 .link:visited {

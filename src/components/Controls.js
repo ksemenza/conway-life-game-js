@@ -1,6 +1,4 @@
 import React from 'react'
-import Buttons from './Buttons'
-import Options from './Options'
 import Tools from './Tools'
 
 

@@ -80,13 +80,14 @@ class App extends React.Component {
   };
 
   handleSettingClick = () => {
-    const text =     <Options
+    const text =     
+    <Options
     rows = {this.props.rows}
     cols = {this.props.cols}
     squareSize={this.props.squareSize}
     onRowChange={this.handleRowChange}
-          onColChange={this.handleColChange}
-          onSizeChange={this.handleSizeChange}
+    onColChange={this.handleColChange}
+    onSizeChange={this.handleSizeChange}
   />
     if ((this.state.message.text === text)) return this.hideMessage();
     
@@ -267,16 +268,7 @@ class App extends React.Component {
           onRandomize={this.handleRandomize}
           onReset={this.handleReset}
         />
-          <Board
-          tool = {this.state.tool}
-          squareSize={this.state.squareSize}
-          squares={this.state.squares}
-          onMouseUp={this.handleMouseUp}
-          onMouseMove={this.handleMouseMove}
-          onClick={this.handleClick}
-          onMouseDown={this.handleMouseDown}
-        />
-        <Controls
+          <Controls
           rows={this.state.rows}
           cols={this.state.cols}
           intervalId={this.state.intervalId}
@@ -291,8 +283,18 @@ class App extends React.Component {
           onToolChange = {this.handleToolChange}
         />
 
+          <Board
+          tool = {this.state.tool}
+          squareSize={this.state.squareSize}
+          squares={this.state.squares}
+          onMouseUp={this.handleMouseUp}
+          onMouseMove={this.handleMouseMove}
+          onClick={this.handleClick}
+          onMouseDown={this.handleMouseDown}
+        />
         <Message message={this.state.message} />
      
+        <p className='copyright'> Developer: Kim Semenza © Guin Dev Productions </p>
 
         
       </main>
