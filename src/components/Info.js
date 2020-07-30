@@ -7,9 +7,11 @@ const Info = props => {
 
     return (
       <section className="info">
+
         <h1 className="heading info_heading">Conway's Game Of Life
-        <br/><span className='my-name'>Developer : Kim Semenza</span>
+    
         </h1>
+
         <div className="info_section help">
         <div className='ctx-wrap'>
         <div className='setup-btn'>
@@ -20,12 +22,14 @@ const Info = props => {
           </div>
         <div className="info_body">
           <div className="info_section stats">
+          <div className='info-data'>
             <div className="stats_label">
               Generation: <span className="stats_value">{props.genNumber}</span>{" "}
             </div>
             <div className="stats_label">
               Death count:{" "}
               <div className="stats_value">{props.deathCount}</div>{" "}
+              </div>
             </div>
             </div>
 

@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import {makeFalsyArray, arrIsFalsy, validateNumber, copyArray, } from './logic/GameLogicHelper'
+import {makeFalsyArray, arrIsFalsy, validateNumber, copyArray, } from './logic/GameLogic'
 import Board from './components/Board'
 import Info from './components/Info'
 import Controls from './components/Controls'
 import Message from './components/Message'
-
+import Options from './components/Options';
 
 class App extends React.Component {
   constructor() {
@@ -20,7 +20,7 @@ class App extends React.Component {
       deathCount: 0,
       tool: "filler",
       message: {
-        text: null, //2 timeouts for smooth transition
+        text: null, //2 timeouts for smooth messages
         timer1: null, //set opacity to 0
         timer2: null //remove from the DOM
       }
@@ -29,8 +29,7 @@ class App extends React.Component {
   }
 
   displayMessage = (text, timer) => {
-    //TODO Change speed
-    const delay = this.hideMessage() ? 5000 : 0; //remove previous message
+    const delay = this.hideMessage() ? 500 : 0; //remove previous message
     setTimeout(() => {
       this.setState({
         message: {
@@ -64,8 +63,14 @@ class App extends React.Component {
     }
   };
 
+  handleSizeChange = event => {
+    const newSize = validateNumber(event.target.value) || 1;
+    this.setState({
+      squareSize: newSize
+    });
+  };
+ 
 
-  /* START of SETTING BUTTONS */
   handleHelpClick = () => {
     const text = `Any live cell with two or three live neighbors survives.
     Any dead cell with three live neighbors becomes a live cell. 
@@ -74,26 +79,21 @@ class App extends React.Component {
     return this.displayMessage(text, 10000);
   };
 
-
   handleSettingClick = () => {
-    const text = `Settings Menu`;
+    const text =     
+    <Options
+    rows = {this.props.rows}
+    cols = {this.props.cols}
+    squareSize={this.props.squareSize}
+    onRowChange={this.handleRowChange}
+    onColChange={this.handleColChange}
+    onSizeChange={this.handleSizeChange}
+  />
     if ((this.state.message.text === text)) return this.hideMessage();
+    
     return this.displayMessage(text, 10000);
   };
 
-
-  /* END of SETTING BUTTONS */
-
-
-/** START OF OPTIONS EVENT HANDLERS  */
-/** ROW LENGTH, COLUMN LENGTH, SQUARE PX SIZE, CELL FILLER/ERASER */
-  handleSizeChange = event => {
-    const newSize = validateNumber(event.target.value) || 1;
-    this.setState({
-      squareSize: newSize
-    });
-  };
- 
 
   handleRowChange = event => {
     const rows = validateNumber(event.target.value) || 1;
@@ -115,17 +115,6 @@ class App extends React.Component {
     });
   };
 
-  handleToolChange = (event) => {
-    this.setState({
-      tool: event.target.value
-    })
-  }
-/** END OF OPTIONS EVENT HANDLERS  */
-
-
-
-/**START OF GAME PLAY BUTTON HANDLERS */
-/** RESET, START/PAUSE, RANDOM */
   handleReset = () => {
     const { rows, cols } = this.state;
     const newSquares = makeFalsyArray(rows, cols);
@@ -137,7 +126,27 @@ class App extends React.Component {
       intervalId: null
     });
   };
+  handleToolChange = (event) => {
+    this.setState({
+      tool: event.target.value
+    })
+  }
+  handleMouseMove = (i, j) => {
+    if (!this.isDown) return;
+    if ((this.state.squares[i][j] && this.state.tool === "filler")||
+    (!this.state.squares[i][j] && this.state.tool === "eraser")) return;
+    const squares = copyArray(this.state.squares);
+    squares[i][j] = this.state.tool ==="filler";
+    this.setState({
+      squares: squares
+    });
+  };
+  handleClick = (i,j) => {
+    this.isDown = true;
+    this.handleMouseMove(i,j);
+    this.isDown = false
 
+  }
   handleStartPause = () => {
     let intervalId;
     if (this.state.intervalId) {
@@ -154,7 +163,6 @@ class App extends React.Component {
     this.setState({
       intervalId: intervalId
     });
-
   };
 
   handleRandomize = () => {
@@ -172,49 +180,33 @@ class App extends React.Component {
     });
   };
 
-  /**END OF GAME PLAY BUTTON HANDLERS */
 
-  /**START MOUSE EVENT HANDLERS */
 
-  handleMouseMove = (i, j) => {
-    if (!this.isDown) return;
-    if ((this.state.squares[i][j] && this.state.tool === "filler")||
-    (!this.state.squares[i][j] && this.state.tool === "eraser")) return;
-    const squares = copyArray(this.state.squares);
-    squares[i][j] = this.state.tool ==="filler";
-    this.setState({
-      squares: squares
-    });
+
+
+  handleMouseDown = () => {
+    this.isDown = true;
   };
 
-  handleClick = (i,j) => {
-    this.isDown = true;
-    this.handleMouseMove(i,j);
-    this.isDown = false
+  handleMouseUp = () => {
+    this.isDown = false;
+  };
 
-  }
-
-  /**END MOUSE EVENT HANDLERS */
-
-
-  /** GAME LOGIC INITIATED FROM ./logic/GameLogic.js */
-  
   makeNextGeneration = () => {
 
-    //state of squares
+    //declaring state of existing squares
     const currentSquares = this.state.squares;
 
-    // checking if board is empty
+    //filter looking while running for filled square 
     if (
       currentSquares.filter(
         row => row.filter(square => square === true).length > 0
       ).length === 0
     ) 
-    //Exit Message
-    //Stopping program
+    //If board no longer contain alive cells message returning generation number
     {
       this.displayMessage("The last generations " + this.state.genNumber, 2000);
-      // return this.handleStartPause();
+      return this.handleStartPause();
     }
 
     //Create temp array to iterate over board
@@ -241,7 +233,7 @@ class App extends React.Component {
           }
         }
 
-    //Implementing rule life logic of population 
+    //Implementing rule logic of population 
         if (currentSquares[i][j]) {
           if (neighborNum > 1 && neighborNum < 4 ) {
             nextSquares[i][j] = true;
@@ -262,8 +254,6 @@ class App extends React.Component {
     });
   };
 
-
-
   render() {
     return (
       <main className="main">
@@ -278,16 +268,7 @@ class App extends React.Component {
           onRandomize={this.handleRandomize}
           onReset={this.handleReset}
         />
-          <Board
-          tool = {this.state.tool}
-          squareSize={this.state.squareSize}
-          squares={this.state.squares}
-          onMouseUp={this.handleMouseUp}
-          onMouseMove={this.handleMouseMove}
-          onClick={this.handleClick}
-          onMouseDown={this.handleMouseDown}
-        />
-        <Controls
+          <Controls
           rows={this.state.rows}
           cols={this.state.cols}
           intervalId={this.state.intervalId}
@@ -302,8 +283,18 @@ class App extends React.Component {
           onToolChange = {this.handleToolChange}
         />
 
+          <Board
+          tool = {this.state.tool}
+          squareSize={this.state.squareSize}
+          squares={this.state.squares}
+          onMouseUp={this.handleMouseUp}
+          onMouseMove={this.handleMouseMove}
+          onClick={this.handleClick}
+          onMouseDown={this.handleMouseDown}
+        />
         <Message message={this.state.message} />
      
+        <p className='copyright'> Developer: Kim Semenza © Guin Dev Productions </p>
 
         
       </main>
