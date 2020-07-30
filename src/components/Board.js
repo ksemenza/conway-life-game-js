@@ -5,6 +5,8 @@ const Board = props => {
     const squares = props.squares;
     const [rows, cols] = [squares.length, squares[0].length];
     const squareElements = Array(rows * cols);
+
+    
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < cols; j++) {
         const className =

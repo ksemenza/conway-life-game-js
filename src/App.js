@@ -17,6 +17,7 @@ class App extends React.Component {
       squares: makeFalsyArray(30, 30),
       intervalId: null,
       genNumber: 1,
+      lifeCount:null,
       deathCount: 0,
       tool: "filler",
       message: {
@@ -38,7 +39,7 @@ class App extends React.Component {
           timer2: null
         }
       });
-      console.log(delay)
+      
     }, delay);
   };
 
@@ -82,9 +83,9 @@ class App extends React.Component {
   handleSettingClick = () => {
     const text =     
     <Options
-    rows = {this.props.rows}
-    cols = {this.props.cols}
-    squareSize={this.props.squareSize}
+    rows = {this.rows}
+    cols = {this.cols}
+    squareSize={this.squareSize}
     onRowChange={this.handleRowChange}
     onColChange={this.handleColChange}
     onSizeChange={this.handleSizeChange}
@@ -126,21 +127,30 @@ class App extends React.Component {
       intervalId: null
     });
   };
+
+
+
   handleToolChange = (event) => {
     this.setState({
       tool: event.target.value
     })
   }
+
+  //Tools Handles Filled and Empty Tools
   handleMouseMove = (i, j) => {
     if (!this.isDown) return;
     if ((this.state.squares[i][j] && this.state.tool === "filler")||
     (!this.state.squares[i][j] && this.state.tool === "eraser")) return;
+    
     const squares = copyArray(this.state.squares);
-    squares[i][j] = this.state.tool ==="filler";
+    squares[i][j] = this.state.tool ==="filler"
+    
     this.setState({
       squares: squares
     });
   };
+
+  
   handleClick = (i,j) => {
     this.isDown = true;
     this.handleMouseMove(i,j);
@@ -233,6 +243,8 @@ class App extends React.Component {
           }
         }
 
+        console.log(neighborNum)
+
     //Implementing rule logic of population 
         if (currentSquares[i][j]) {
           if (neighborNum > 1 && neighborNum < 4 ) {
@@ -246,13 +258,13 @@ class App extends React.Component {
         }
       }
     }
-
     this.setState({
       squares: nextSquares,
       genNumber: this.state.genNumber + 1,
       deathCount: deathCount
     });
   };
+
 
   render() {
     return (

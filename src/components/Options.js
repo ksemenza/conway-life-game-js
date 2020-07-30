@@ -17,7 +17,7 @@ const Options = props => {
             type="number"
             name="rows"
             min="1"
-            max="100"
+            max="50"
             value={props.rows}
             onChange={props.onRowChange}
           />
@@ -32,7 +32,7 @@ const Options = props => {
             type="number"
             name="cols"
             min="1"
-            max="100"
+            max="50"
             value={props.cols}
             onChange={props.onColChange}
           />
@@ -48,6 +48,7 @@ const Options = props => {
             type="number"
             name="size"
             min="1"
+            max="80"
             value={props.squareSize}
             onChange={props.onSizeChange}
           />
