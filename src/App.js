@@ -5,7 +5,7 @@ import Board from './components/Board'
 import Info from './components/Info'
 import Controls from './components/Controls'
 import Message from './components/Message'
-import Options from './components/Options'
+import Options from './components/Options';
 
 class App extends React.Component {
   constructor() {
@@ -79,13 +79,19 @@ class App extends React.Component {
     return this.displayMessage(text, 10000);
   };
 
-
   handleSettingClick = () => {
-    const text = `Settings Menu`;
+    const text =     <Options
+    rows = {this.props.rows}
+    cols = {this.props.cols}
+    squareSize={this.props.squareSize}
+    onRowChange={this.handleRowChange}
+          onColChange={this.handleColChange}
+          onSizeChange={this.handleSizeChange}
+  />
     if ((this.state.message.text === text)) return this.hideMessage();
+    
     return this.displayMessage(text, 10000);
   };
-
 
 
   handleRowChange = event => {
@@ -172,6 +178,10 @@ class App extends React.Component {
       squares: randomSquares
     });
   };
+
+
+
+
 
   handleMouseDown = () => {
     this.isDown = true;

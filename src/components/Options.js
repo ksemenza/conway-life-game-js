@@ -1,10 +1,12 @@
 import React from 'react'
 
 const Options = props => {
+
     return (
       <section className="menu-options">
       <h2 className="heading options_heading">Dimensions</h2>
         <div className="option">
+        <div className="option-data">
           <label className="option_label" htmlFor="rowNum">
             Row
           </label>
@@ -48,6 +50,7 @@ const Options = props => {
             value={props.squareSize}
             onChange={props.onSizeChange}
           />
+        </div>
         </div>
       </section>
     );

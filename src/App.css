@@ -225,17 +225,22 @@ flex-direction: column;
   visibility: hidden;
 }
 
+.option-data {
+  display: flex;
+}
+
 .options {
   display: flex;
   flex-direction: column;
   height: 300px;
-  justify-content: space-evenly;
+  justify-content:space-around;
 } 
 
 .options_heading {
 font-size: 45px;
 margin-left: -65px;
 color: lime;
+margin-left: 5px;
 }
 
 .stats_value {
@@ -249,23 +254,30 @@ color: lime;
 .menu-options{
   display: flex;
   justify-content: space-evenly;
-  width: 600px;
+  width: 100%;
   padding-top: 15px;
   color: white;
+  flex-direction: column;
   
 
   
+}
+
+input#eraser {
+  margin-left: 25px;
 }
 
 .option {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: fit-content;
 }
 
 .option_label {
   display: block;
-  font-size: 30px;
+  font-size: 32px;
+  margin-left: 15px;
   margin-right: 5px;
   
 }
@@ -278,6 +290,7 @@ color: lime;
   font-family: pixel-font;
   margin: 0 auto;
 }
+
 .help_item {
   cursor: help;
   margin-left: 150px;
@@ -288,7 +301,7 @@ color: lime;
 
 .tool {
   font-size: 35px;
-  margin-left: 20px;
+  margin-left: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -299,7 +312,7 @@ color: lime;
 .tools {
   display: flex;
   width: 100%;
-  margin-left: 20px;
+  flex-direction: column;
 }
 
 .square {
