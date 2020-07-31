@@ -24,7 +24,8 @@ uses [http://localhost:3000](http://localhost:3000) address
 1. Initialize the cells in the grid.
 2. At each time step in the simulation, for each 
    cell (i, j) in the grid, do the following:<br/>
-   a. Update the value of cell (i, j) based on <br/>
-      its neighbors, taking into account the <br/>
-      boundary conditions.<br/>
+   a. Update the value of cell (i, j) based on 
+      its neighbors, taking into account the 
+      boundary conditions.<br/> 
+      <br/>
    b. Update the display of grid values.
