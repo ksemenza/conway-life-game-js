@@ -81,15 +81,6 @@ class App extends React.Component {
     return this.displayMessage(text, 10000);
   };
 
-
-  handleSpeedChange = (e) => {
-    clearInterval(this.state.intervalId);
-
-    this.setState({
-      speed: e.target.value
-    })
-  }
-
   handleSettingClick = () => {
     const text =     
     <Options
@@ -178,7 +169,7 @@ class App extends React.Component {
           "There are no live cells, try randomizing or drawing some",
           2000
         );
-      intervalId = setInterval(this.makeNextGeneration, 100);
+      intervalId = setInterval(this.makeNextGeneration, 10);
     }
     this.setState({
       intervalId: intervalId
@@ -239,9 +230,9 @@ class App extends React.Component {
     for (let i = 0; i < currentSquares.length; i++) {
     //Iterate over the y axis to end
       for (let j = 0; j < currentSquares[i].length; j++) {
-    //Continue iterate if end then start at 0
+    //defining neighbor cells surrounding point of x and y
         let neighborNum = currentSquares[i][j] ? -1 : 0;
-      //Second value to swap
+      //evaluating neighbor cells
         for (let m = i - 1; m <= i + 1; m++) {
           if (m >= 0 && m < currentSquares.length) {
             for (let n = j - 1; n <= j + 1; n++) {
