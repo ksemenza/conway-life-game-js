@@ -17,8 +17,9 @@ class App extends React.Component {
       squares: makeFalsyArray(30, 30),
       intervalId: null,
       genNumber: 1,
-      lifeCount:null,
+      lifeCount:0,
       deathCount: 0,
+      speed:0,
       tool: "filler",
       message: {
         text: null, //2 timeouts for smooth messages
@@ -80,6 +81,15 @@ class App extends React.Component {
     return this.displayMessage(text, 10000);
   };
 
+
+  handleSpeedChange = (e) => {
+    clearInterval(this.state.intervalId);
+
+    this.setState({
+      speed: e.target.value
+    })
+  }
+
   handleSettingClick = () => {
     const text =     
     <Options
@@ -92,7 +102,7 @@ class App extends React.Component {
   />
     if ((this.state.message.text === text)) return this.hideMessage();
     
-    return this.displayMessage(text, 10000);
+    return this.displayMessage(text, 100000);
   };
 
 
@@ -229,8 +239,9 @@ class App extends React.Component {
     for (let i = 0; i < currentSquares.length; i++) {
     //Iterate over the y axis to end
       for (let j = 0; j < currentSquares[i].length; j++) {
-    //Evaluating the surrounding cells 
+    //Continue iterate if end then start at 0
         let neighborNum = currentSquares[i][j] ? -1 : 0;
+      //Second value to swap
         for (let m = i - 1; m <= i + 1; m++) {
           if (m >= 0 && m < currentSquares.length) {
             for (let n = j - 1; n <= j + 1; n++) {
@@ -243,7 +254,7 @@ class App extends React.Component {
           }
         }
 
-        console.log(neighborNum)
+        console.log(nextSquares)
 
     //Implementing rule logic of population 
         if (currentSquares[i][j]) {

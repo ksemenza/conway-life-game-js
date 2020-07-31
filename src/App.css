@@ -246,9 +246,10 @@ margin-bottom: -15px;
 }
 
 .settings-details {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 18px;
+  font-family: pixel-font;
+  font-size: 30px;
   margin: 35px auto;
+  color: lime;
 }
 
 .stats_value {
@@ -263,7 +264,7 @@ margin-bottom: -15px;
   display: flex;
   justify-content: space-evenly;
   width: 100%;
-  color: white;
+  color: lime;
   flex-direction: column;
   
 
@@ -295,6 +296,8 @@ input#eraser {
   text-align: center;
   font-family: pixel-font;
   margin: 0 auto;
+  background-color: black;
+  color: lime;
 }
 
 .help_item {
@@ -341,4 +344,26 @@ input#eraser {
 
 .link:visited {
   color: #5c821A;
+}
+
+.message-ctx{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.message-close-btn {
+  font-size: 35px;
+  font-family: pixel-font;
+  width: 104px;
+  height: 54px;
+  border: 2px dashed lime;
+  background-color:#071305;
+  margin-top: 15px;
+  color: lime;
+}
+
+.message-close-btn:hover {
+  color: white;
+  border-color: green;
 }

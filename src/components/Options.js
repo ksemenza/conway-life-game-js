@@ -4,8 +4,15 @@ const Options = props => {
 
     return (
       <section className="menu-options">
-      <h2 className="heading options_heading">Dimensions</h2>
-      <p className='settings-details'>Input: row amount, column amount, and cell size</p>
+      <h2 className="heading options_heading">Current Dimensions</h2>
+      <p className='settings-details'> 
+     Grid 30 X 30 Cells 20px 
+
+     <br/>
+     <span>Row Amount ~ Column Amount ~ Cell Size</span>
+      <br/>
+    
+      </p>
         <div className="option">
         <div className="option-data">
           <label className="option_label" htmlFor="rowNum">

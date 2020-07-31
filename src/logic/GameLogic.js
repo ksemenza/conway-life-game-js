@@ -1,12 +1,16 @@
 export function copyArray(array) {
     //deep copy array of arrays
+    //iterate board for cell state
     const copy = [];
     const [rows, cols] = [array.length, array[0].length];
+    //rows iterate i
     copy.length = rows;
     for (let i = 0; i < rows; i++) {
+    //cols w/ ref [row]
       copy[i] = [];
       copy[i].length = cols;
       for (let j = 0; j < cols; j++) {
+      //board started paused cur state
         copy[i][j] = array[i][j];
       }
     }
